@@ -1,4 +1,5 @@
 import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/providers";
+import { clearNotesLogout } from "../journal/journalSlice";
 import { checkingCredentials, login, logout } from "./authSlice"
 
 //thunks acciones que yo puedo hacer dispatch, pero estas actions tienen tareas asincronas
@@ -38,6 +39,7 @@ export const startLoginWithEmailPassword = ({email,password}) => {
 export const startLogout = () => {
     return async (dispatch) => {
         await logoutFirebase();
+        dispatch(clearNotesLogout());
         dispatch(logout());
     }
 }
